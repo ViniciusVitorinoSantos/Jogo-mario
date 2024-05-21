@@ -1,2 +1,2 @@
 # Jogo-mario
-jogo mario feito em javascript
+## *jogo mario feito em javascript*
