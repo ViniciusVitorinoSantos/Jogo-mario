@@ -1,13 +1,10 @@
-const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) => {
-  const element = document.querySelector(item);
-  if (!element) {
-    alert(`Element not found: ${item}`);
-  }
-  return element;
-});
+const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
+  document.querySelector(item)
+);
 
 const jump = () => {
   if (mario) {
+    console.log("Jump triggered");
     mario.classList.add("jump");
     setTimeout(() => {
       mario.classList.remove("jump");
@@ -15,14 +12,23 @@ const jump = () => {
   }
 };
 
-// Adiciona o evento de toque para dispositivos móveis
+// Adiciona eventos para toque, clique e tecla
 document.addEventListener("touchstart", (event) => {
-  alert("Touch detected");
+  console.log("Touch detected");
   jump();
 });
 
-// Adiciona o evento de teclado para dispositivos desktop
-document.addEventListener("keydown", jump);
+document.addEventListener("click", (event) => {
+  console.log("Click detected");
+  jump();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "Space") {
+    console.log("Keydown detected");
+    jump();
+  }
+});
 
 const loop = setInterval(() => {
   if (pipe && mario) {
@@ -55,5 +61,16 @@ if (restart) {
     location.reload(true);
   });
 } else {
+  alert("Restart button not found");
+}
+
+// Verifique se os elementos estão carregados corretamente
+if (!mario) {
+  alert("Mario element not found");
+}
+if (!pipe) {
+  alert("Pipe element not found");
+}
+if (!restart) {
   alert("Restart button not found");
 }
