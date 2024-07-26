@@ -2,10 +2,6 @@ const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
   document.querySelector(item)
 );
 
-// Adiciona o evento de toque para dispositivos móveis
-document.addEventListener("touchstart", jump);
-
-ontouchstart = ("jump") => {};
 
 
 const jump = () => {
@@ -14,6 +10,9 @@ const jump = () => {
     mario.classList.remove("jump");
   }, 500);
 };
+
+// Adiciona o evento de toque para dispositivos móveis
+document.addEventListener("touchstart", jump);
 
 const loop = setInterval(() => {
   const pipePosition = pipe.offsetLeft;
