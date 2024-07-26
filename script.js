@@ -2,7 +2,8 @@ const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
   document.querySelector(item)
 );
 
-addEventListener("touchstart", ("jump") => {});
+// Adiciona o evento de toque para dispositivos móveis
+document.addEventListener("touchstart", jump);
 
 ontouchstart = ("jump") => {};
 
