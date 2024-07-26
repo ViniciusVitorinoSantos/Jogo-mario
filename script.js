@@ -1,53 +1,59 @@
-const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
-  document.querySelector(item)
-);
+const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) => {
+  const element = document.querySelector(item);
+  if (!element) {
+    alert(`Element not found: ${item}`);
+  }
+  return element;
+});
+
+const jump = () => {
+  if (mario) {
+    mario.classList.add("jump");
+    setTimeout(() => {
+      mario.classList.remove("jump");
+    }, 500);
+  }
+};
 
 // Adiciona o evento de toque para dispositivos móveis
 document.addEventListener("touchstart", (event) => {
-  console.log("Touch detected");
+  alert("Touch detected");
   jump();
 });
-
-
-const jump = () => {
-  mario.classList.add("jump");
-  setTimeout(() => {
-    mario.classList.remove("jump");
-  }, 500);
-};
-
-
-const loop = setInterval(() => {
-  const pipePosition = pipe.offsetLeft;
-  // colocando o + na frente da string, ele tenta converter para numero.
-  const marioPosition = +window
-    .getComputedStyle(mario)
-    .bottom.replace("px", ""); // vai pegar o estilo da imagem do mario
-  console.log(marioPosition); 
-  if (pipePosition <= 100 && pipePosition > 0 && marioPosition < 80) {
-    pipe.style.animation = "none";
-    pipe.style.left = `${pipePosition}px`;
-
-    mario.style.animation = "none";
-    mario.style.bottom = `${marioPosition}px`;
-
-    mario.src = "./assets/game-over.png";
-    mario.style.width = "100px";
-    mario.style.marginLeft = "25px";
-
-    mario.classList.remove("jump");
-    mario.classList.add("game-over");
-    console.log(mario)
-    clearInterval(loop);
-  }
-}, 10);
 
 // Adiciona o evento de teclado para dispositivos desktop
 document.addEventListener("keydown", jump);
 
-// Adiciona o evento de toque para dispositivos móveis
-document.addEventListener("touchstart", jump);
+const loop = setInterval(() => {
+  if (pipe && mario) {
+    const pipePosition = pipe.offsetLeft;
+    const marioPosition = +window
+      .getComputedStyle(mario)
+      .bottom.replace("px", "");
 
-restart.addEventListener("click", () => {
-  location.reload(true);
-});
+    if (pipePosition <= 100 && pipePosition > 0 && marioPosition < 80) {
+      pipe.style.animation = "none";
+      pipe.style.left = `${pipePosition}px`;
+
+      mario.style.animation = "none";
+      mario.style.bottom = `${marioPosition}px`;
+
+      mario.src = "./assets/game-over.png";
+      mario.style.width = "100px";
+      mario.style.marginLeft = "25px";
+
+      mario.classList.remove("jump");
+      mario.classList.add("game-over");
+
+      clearInterval(loop);
+    }
+  }
+}, 10);
+
+if (restart) {
+  restart.addEventListener("click", () => {
+    location.reload(true);
+  });
+} else {
+  alert("Restart button not found");
+}
