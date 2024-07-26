@@ -11,8 +11,7 @@ const jump = () => {
   }, 500);
 };
 
-// Adiciona o evento de toque para dispositivos móveis
-document.addEventListener("touchstart", jump);
+x
 
 const loop = setInterval(() => {
   const pipePosition = pipe.offsetLeft;
@@ -38,7 +37,12 @@ const loop = setInterval(() => {
     clearInterval(loop);
   }
 }, 10);
+
+// Adiciona o evento de teclado para dispositivos desktop
 document.addEventListener("keydown", jump);
+
+// Adiciona o evento de toque para dispositivos móveis
+document.addEventListener("touchstart", jump);
 
 restart.addEventListener("click", () => {
   location.reload(true);
