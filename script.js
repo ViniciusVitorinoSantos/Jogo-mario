@@ -2,8 +2,10 @@ const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
   document.querySelector(item)
 );
 
-addEventListner("touchstart",(jump) => {});
+addEventListener("touchstart", (jump) => {});
+
 ontouchstart = (jump) => {};
+
 
 const jump = () => {
   mario.classList.add("jump");
