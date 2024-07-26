@@ -1,10 +1,24 @@
-const [mario, pipe, restart] = [".mario", ".pipe", ".restart"].map((item) =>
+const [mario, pipe, restart, scoreBoard] = [".mario", ".pipe", ".restart", ".score"].map((item) =>
   document.querySelector(item)
 );
 
+let score = 0;
+let pipeSpeed = 1.3; // Velocidade inicial dos canos em segundos
+let pipeAnimation = `pipe ${pipeSpeed}s infinite linear`;
+
+const updateScore = () => {
+  score++;
+  scoreBoard.textContent = `Score: ${score}`;
+};
+
+const updatePipeSpeed = () => {
+  pipeSpeed -= 0.1; // Aumenta a velocidade dos canos
+  pipeAnimation = `pipe ${pipeSpeed}s infinite linear`;
+  pipe.style.animation = pipeAnimation;
+};
+
 const jump = () => {
   if (mario) {
-    console.log("Jump triggered");
     mario.classList.add("jump");
     setTimeout(() => {
       mario.classList.remove("jump");
@@ -14,18 +28,15 @@ const jump = () => {
 
 // Adiciona eventos para toque, clique e tecla
 document.addEventListener("touchstart", (event) => {
-  console.log("Touch detected");
   jump();
 });
 
 document.addEventListener("click", (event) => {
-  console.log("Click detected");
   jump();
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
-    console.log("Keydown detected");
     jump();
   }
 });
@@ -52,6 +63,10 @@ const loop = setInterval(() => {
       mario.classList.add("game-over");
 
       clearInterval(loop);
+    } else if (pipePosition < -80) {
+      // Quando o cano sair da tela pela esquerda
+      updateScore();
+      updatePipeSpeed();
     }
   }
 }, 10);
@@ -60,8 +75,6 @@ if (restart) {
   restart.addEventListener("click", () => {
     location.reload(true);
   });
-} else {
-  alert("Restart button not found");
 }
 
 // Verifique se os elementos estão carregados corretamente
@@ -73,4 +86,7 @@ if (!pipe) {
 }
 if (!restart) {
   alert("Restart button not found");
+}
+if (!scoreBoard) {
+  alert("Score board not found");
 }
