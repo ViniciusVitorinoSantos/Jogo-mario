@@ -59,6 +59,14 @@ body {
 .restart:hover {
   transform: scale(1.02);
 }
+
+.score {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
 @keyframes pipe {
   from {
     right: -80px; /*o -100 pixels é para o tubo vir de fora e não começar dentro do quadrado */
