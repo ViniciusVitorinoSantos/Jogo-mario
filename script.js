@@ -1,4 +1,4 @@
-const [mario, pipe, restart, scoreBoard] = [".mario", ".pipe", ".restart", ".score"].map((item) =>
+const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", ".restart", ".score", "#background-music"].map((item) =>
   document.querySelector(item)
 );
 
@@ -6,15 +6,22 @@ let score = 0;
 let pipeSpeed = 1.3; // Velocidade inicial dos canos em segundos
 let pipeAnimation = `pipe ${pipeSpeed}s infinite linear`;
 
+pipe.style.animation = pipeAnimation;
+
 const updateScore = () => {
   score++;
   scoreBoard.textContent = `Score: ${score}`;
+  console.log(`Score: ${score}`); // Log de depuração
 };
 
 const updatePipeSpeed = () => {
   pipeSpeed -= 0.1; // Aumenta a velocidade dos canos
+  if (pipeSpeed <= 0.5) { // Limita a velocidade mínima
+    pipeSpeed = 0.5;
+  }
   pipeAnimation = `pipe ${pipeSpeed}s infinite linear`;
   pipe.style.animation = pipeAnimation;
+  console.log(`Pipe Speed: ${pipeSpeed}s`); // Log de depuração
 };
 
 const jump = () => {
@@ -28,15 +35,19 @@ const jump = () => {
 
 // Adiciona eventos para toque, clique e tecla
 document.addEventListener("touchstart", (event) => {
+  event.preventDefault(); // Impede o comportamento padrão do toque
+  console.log("Touch detected");
   jump();
 });
 
 document.addEventListener("click", (event) => {
+  console.log("Click detected");
   jump();
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
+    console.log("Keydown detected");
     jump();
   }
 });
@@ -63,8 +74,9 @@ const loop = setInterval(() => {
       mario.classList.add("game-over");
 
       clearInterval(loop);
-    } else if (pipePosition < -80) {
-      // Quando o cano sair da tela pela esquerda
+      backgroundMusic.pause(); // Pausa a música quando o jogo termina
+    } else if (pipePosition < 0) {
+      // Quando o cano passar do Mario
       updateScore();
       updatePipeSpeed();
     }
@@ -89,4 +101,9 @@ if (!restart) {
 }
 if (!scoreBoard) {
   alert("Score board not found");
+}
+if (!backgroundMusic) {
+  alert("Background music not found");
+} else {
+  backgroundMusic.play(); // Inicia a música quando o jogo começa
 }
