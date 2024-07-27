@@ -60,12 +60,17 @@ body {
   transform: scale(1.02);
 }
 
+/* Adicione isso ao seu CSS existente */
+
 .score {
     font-size: 24px;
     color: white;
     text-align: center;
     margin-top: 10px;
+    z-index: 10; /* Garante que o marcador de pontos esteja visível sobre outros elementos */
+    position: relative; /* Ajusta a posição para se adaptar ao layout */
 }
+
 
 @keyframes pipe {
   from {
