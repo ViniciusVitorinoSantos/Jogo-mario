@@ -1,3 +1,5 @@
+// script.js
+
 const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", ".restart", ".score", "#background-music"].map((item) =>
   document.querySelector(item)
 );
@@ -5,19 +7,16 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 let score = 0;
 let pipeSpeed = 1.3; // Velocidade inicial dos canos em segundos
 
-// Função para atualizar o marcador de pontos
 const updateScore = () => {
   score++;
   scoreBoard.textContent = `Score: ${score}`;
 };
 
-// Função para atualizar a velocidade dos canos
 const updatePipeSpeed = () => {
-  pipeSpeed = Math.max(0.5, pipeSpeed - 0.05); // Aumenta a velocidade dos canos, limitando a velocidade mínima
+  pipeSpeed = Math.max(0.5, pipeSpeed - 0.05); // Limita a velocidade mínima
   pipe.style.animation = `pipe ${pipeSpeed}s infinite linear`;
 };
 
-// Função de pular
 const jump = () => {
   if (mario) {
     mario.classList.add("jump");
@@ -43,7 +42,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// Função de loop do jogo
 const loop = setInterval(() => {
   if (pipe && mario) {
     const pipePosition = pipe.offsetLeft;
@@ -64,9 +62,11 @@ const loop = setInterval(() => {
       mario.classList.add("game-over");
 
       clearInterval(loop);
-      backgroundMusic.pause(); // Pausa a música quando o jogo termina
+      if (backgroundMusic) {
+        backgroundMusic.pause(); // Pausa a música quando o jogo termina
+      }
     } else if (pipePosition < 0) {
-      // Quando o cano passar do Mario
+      // Quando o cano passa da tela
       updateScore();
       updatePipeSpeed();
     }
@@ -79,21 +79,20 @@ if (restart) {
   });
 }
 
-// Verifique se os elementos estão carregados corretamente
 if (!mario) {
-  alert("Mario element not found");
+  console.error("Mario element not found");
 }
 if (!pipe) {
-  alert("Pipe element not found");
+  console.error("Pipe element not found");
 }
 if (!restart) {
-  alert("Restart button not found");
+  console.error("Restart button not found");
 }
 if (!scoreBoard) {
-  alert("Score board not found");
+  console.error("Score board not found");
 }
-if (!backgroundMusic) {
-  alert("Background music not found");
-} else {
+if (backgroundMusic) {
   backgroundMusic.play(); // Inicia a música quando o jogo começa
+} else {
+  console.error("Background music not found");
 }
