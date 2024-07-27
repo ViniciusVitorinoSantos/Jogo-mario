@@ -1,43 +1,52 @@
+/* styles.css */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   background-color: black;
 }
+
 .board {
   width: 80%;
   height: 500px;
   border-bottom: 15px solid rgb(22, 114, 22);
   margin: 30px auto;
   position: relative;
-  overflow: hidden; /* a hora que ele sair do quadro, vai sumir*/
+  overflow: hidden; /* Oculta o conteúdo que sai da área do board */
   background: linear-gradient(#87ceeb, #e0f6ff);
 }
+
 .pipe {
   position: absolute;
   bottom: 0;
   width: 80px;
   animation: pipe 1.3s infinite linear;
 }
+
 .mario {
   position: absolute;
   bottom: 0;
   width: 120px;
 }
+
 .jump {
   animation: jump 500ms ease-out;
 }
+
 .game-over {
   animation: gameOver 1000ms cubic-bezier(0.79, 0.3, 0.39, 1.15);
 }
+
 .clouds {
   position: absolute;
   width: 150px;
   top: 100px;
   animation: clouds 10s infinite linear;
 }
+
 .button {
   width: 80%;
   margin: 0 auto;
@@ -45,6 +54,7 @@ body {
   justify-content: center;
   padding: 10px 0;
 }
+
 .restart {
   width: 40%;
   padding: 15px 0;
@@ -56,25 +66,23 @@ body {
   color: white;
   transition: 800ms;
 }
+
 .restart:hover {
   transform: scale(1.02);
 }
 
-/* Adicione isso ao seu CSS existente */
-
 .score {
-    font-size: 24px;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-    z-index: 10; /* Garante que o marcador de pontos esteja visível sobre outros elementos */
-    position: relative; /* Ajusta a posição para se adaptar ao layout */
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  z-index: 10;
+  position: relative;
 }
-
 
 @keyframes pipe {
   from {
-    right: -80px; /*o -100 pixels é para o tubo vir de fora e não começar dentro do quadrado */
+    right: -80px; /* O tubo começa fora da tela */
   }
   to {
     right: 100%;
@@ -98,9 +106,10 @@ body {
     bottom: 0;
   }
 }
+
 @keyframes clouds {
   from {
-    right: -150px; /*o -150 pixels é para o tubo vir de fora e não começar dentro do quadrado */
+    right: -150px; /* Nuvens começam fora da tela */
   }
   to {
     right: 100%;
@@ -115,13 +124,3 @@ body {
     bottom: -120px;
   }
 }
-
-@keyframes pipe {
-  from {
-    right: -80px;
-  }
-  to {
-    right: 100%;
-  }
-}
-
