@@ -110,3 +110,13 @@ body {
     bottom: -120px;
   }
 }
+
+@keyframes pipe {
+  from {
+    right: -80px;
+  }
+  to {
+    right: 100%;
+  }
+}
+
