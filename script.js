@@ -5,10 +5,10 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 );
 
 let score = 0;
-let pipeSpeed = 1.3; // Velocidade inicial dos canos em segundos
+let pipeSpeed = 1.30; // Velocidade inicial dos canos em segundos
 
 const updateScore = () => {
-  score++;
+  ++score;
   scoreBoard.textContent = `Score: ${score}`;
 };
 
