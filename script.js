@@ -68,7 +68,7 @@ const loop = setInterval(() => {
     } else if (pipePosition < 0) {
       // Quando o cano passa da tela
       updateScore();
-      updatePipeSpeed();
+      //updatePipeSpeed();
     }
   }
 }, 10);
