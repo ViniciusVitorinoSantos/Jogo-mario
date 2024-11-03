@@ -71,7 +71,7 @@ const loop = setInterval(() => {
       //updatePipeSpeed();
     }
   }
-}, 10);
+}, 1);
 
 if (restart) {
   restart.addEventListener("click", () => {
