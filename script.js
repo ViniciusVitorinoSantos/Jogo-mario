@@ -8,7 +8,7 @@ let score = 0;
 let pipeSpeed = 1.50; // Velocidade inicial dos canos em segundos
 
 const updateScore = () => {
-  ++score;
+  score++;
   scoreBoard.textContent = `Score: ${score}`;
 };
 
