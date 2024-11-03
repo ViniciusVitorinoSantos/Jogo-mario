@@ -13,7 +13,7 @@ const updateScore = () => {
 };
 
 const updatePipeSpeed = () => {
-  pipeSpeed = Math.max(0.5, pipeSpeed - 0.05); // Limita a velocidade mínima
+  pipeSpeed = Math.max(0.1, pipeSpeed - 0.01); // Limita a velocidade mínima
   pipe.style.animation = `pipe ${pipeSpeed}s infinite linear`;
 };
 
