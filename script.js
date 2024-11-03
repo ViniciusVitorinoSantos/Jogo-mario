@@ -12,10 +12,10 @@ const updateScore = () => {
   scoreBoard.textContent = `Score: ${score}`;
 };
 
-const updatePipeSpeed = () => {
+/*const updatePipeSpeed = () => {
   pipeSpeed = Math.max(0.1, pipeSpeed - 0.01); // Limita a velocidade mínima
   pipe.style.animation = `pipe ${pipeSpeed}s infinite linear`;
-};
+};*/
 
 const jump = () => {
   if (mario) {
