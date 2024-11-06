@@ -35,25 +35,6 @@ h2 {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tamanho mínimo de 150px por coluna */
-  gap: 10px; /* Espaçamento entre as imagens */
-  padding: 10px;
-}
-
-.gallery img:hover {
-  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
-}
-
-.gallery img {
-  width: 150px; /* Define uma largura fixa */
-  height: 280px; /* Define uma altura fixa */
-  object-fit: cover; /* Faz a imagem preencher o espaço mantendo as proporções */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
 .pipe {
   position: absolute;
   bottom: 0;
