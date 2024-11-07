@@ -3,7 +3,7 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 );
 
 let score = 0;
-let pipeSpeed = 1.20; // Velocidade inicial dos canos em segundos
+let pipeSpeed = 1.00; // Velocidade inicial dos canos em segundos
 let pipePassed = false; // Flag para verificar se o cano já passou
 
 const updateScore = () => {
