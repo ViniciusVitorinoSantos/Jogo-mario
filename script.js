@@ -21,7 +21,7 @@ const jump = () => {
     mario.classList.add("jump");
     setTimeout(() => {
       mario.classList.remove("jump");
-    }, window.innerWidth < 600 ? 300 : 500); // Salto mais rápido para dispositivos móveis
+    }, window.innerWidth < 600 ? 250 : 500); // Salto mais rápido para dispositivos móveis
   }
 };
 
