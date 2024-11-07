@@ -5,7 +5,7 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 );
 
 let score = 0;
-let pipeSpeed = 3.80; // Velocidade inicial dos canos em segundos
+let pipeSpeed = 1.20; // Velocidade inicial dos canos em segundos
 
 const updateScore = () => {
   ++score;
@@ -22,7 +22,7 @@ const jump = () => {
     mario.classList.add("jump");
     setTimeout(() => {
       mario.classList.remove("jump");
-    }, 800);
+    }, 500);
   }
 };
 
