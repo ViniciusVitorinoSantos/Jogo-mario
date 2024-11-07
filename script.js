@@ -3,30 +3,35 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 );
 
 let score = 0;
-let pipeSpeed = 1.00; // Velocidade inicial dos canos em segundos
-let pipePassed = false; // Flag para verificar se o cano já passou
+let pipeSpeed = window.innerWidth < 600 ? 0.8 : 1.20; // Aumenta a velocidade do cano para telas menores
+let pipePassed = false;
 
 const updateScore = () => {
-  score++;
+  ++score;
   scoreBoard.textContent = `Score: ${score}`;
 };
+
+// Ajusta a velocidade da animação do cano
+if (pipe) {
+  pipe.style.animation = `pipe ${pipeSpeed}s infinite linear`;
+}
 
 const jump = () => {
   if (mario) {
     mario.classList.add("jump");
     setTimeout(() => {
       mario.classList.remove("jump");
-    }, 500);
+    }, window.innerWidth < 600 ? 300 : 500); // Salto mais rápido para dispositivos móveis
   }
 };
 
-// Adiciona eventos para toque, clique e tecla
+// Eventos de toque, clique e tecla
 document.addEventListener("touchstart", (event) => {
-  event.preventDefault(); // Impede o comportamento padrão do toque
+  event.preventDefault();
   jump();
 });
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", () => {
   jump();
 });
 
@@ -36,12 +41,14 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Loop principal do jogo
 const loop = setInterval(() => {
   if (pipe && mario) {
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
 
     if (pipePosition <= 100 && pipePosition > 0 && marioPosition < 80) {
+      // Lógica de colisão e game over
       pipe.style.animation = "none";
       pipe.style.left = `${pipePosition}px`;
 
@@ -57,39 +64,19 @@ const loop = setInterval(() => {
 
       clearInterval(loop);
       if (backgroundMusic) {
-        backgroundMusic.pause(); // Pausa a música quando o jogo termina
+        backgroundMusic.pause();
       }
     } else if (pipePosition < 0 && !pipePassed) {
-      // Quando o cano passa da tela
       updateScore();
-      pipePassed = true; // Marca que o cano passou
+      pipePassed = true;
     } else if (pipePosition > 0) {
-      // Reseta a flag quando o cano ainda está na tela
       pipePassed = false;
     }
   }
-}, 10); // Use um valor de intervalo um pouco maior para economizar recursos
+}, 10);
 
 if (restart) {
   restart.addEventListener("click", () => {
     location.reload(true);
   });
-}
-
-if (!mario) {
-  console.error("Mario element not found");
-}
-if (!pipe) {
-  console.error("Pipe element not found");
-}
-if (!restart) {
-  console.error("Restart button not found");
-}
-if (!scoreBoard) {
-  console.error("Score board not found");
-}
-if (backgroundMusic) {
-  backgroundMusic.play(); // Inicia a música quando o jogo começa
-} else {
-  console.error("Background music not found");
 }
