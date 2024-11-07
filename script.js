@@ -7,7 +7,7 @@ let pipeSpeed = 1.20; // Velocidade inicial dos canos em segundos
 let pipePassed = false; // Flag para verificar se o cano já passou
 
 const updateScore = () => {
-  ++score;
+  score++;
   scoreBoard.textContent = `Score: ${score}`;
 };
 
