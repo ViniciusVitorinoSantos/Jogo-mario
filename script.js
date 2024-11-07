@@ -1,21 +1,15 @@
-// script.js
-
 const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", ".restart", ".score", "#background-music"].map((item) =>
   document.querySelector(item)
 );
 
 let score = 0;
 let pipeSpeed = 1.20; // Velocidade inicial dos canos em segundos
+let pipePassed = false; // Flag para verificar se o cano já passou
 
 const updateScore = () => {
   ++score;
   scoreBoard.textContent = `Score: ${score}`;
 };
-
-/*const updatePipeSpeed = () => {
-  pipeSpeed = Math.max(0.1, pipeSpeed - 0.01); // Limita a velocidade mínima
-  pipe.style.animation = `pipe ${pipeSpeed}s infinite linear`;
-};*/
 
 const jump = () => {
   if (mario) {
@@ -65,13 +59,16 @@ const loop = setInterval(() => {
       if (backgroundMusic) {
         backgroundMusic.pause(); // Pausa a música quando o jogo termina
       }
-    } else if (pipePosition < 0) {
+    } else if (pipePosition < 0 && !pipePassed) {
       // Quando o cano passa da tela
       updateScore();
-      //updatePipeSpeed();
+      pipePassed = true; // Marca que o cano passou
+    } else if (pipePosition > 0) {
+      // Reseta a flag quando o cano ainda está na tela
+      pipePassed = false;
     }
   }
-}, 1);
+}, 10); // Use um valor de intervalo um pouco maior para economizar recursos
 
 if (restart) {
   restart.addEventListener("click", () => {
