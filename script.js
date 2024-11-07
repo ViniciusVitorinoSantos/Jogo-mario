@@ -3,7 +3,7 @@ const [mario, pipe, restart, scoreBoard, backgroundMusic] = [".mario", ".pipe", 
 );
 
 let score = 0;
-let pipeSpeed = window.innerWidth < 600 ? 0.8 : 1.20; // Aumenta a velocidade do cano para telas menores
+let pipeSpeed = window.innerWidth < 600 ? 0.6 : 1.20; // Aumenta a velocidade do cano para telas menores
 let pipePassed = false;
 
 const updateScore = () => {
